@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 
 class NoteItem extends StatelessWidget {
-  const NoteItem({super.key});
+  const NoteItem({super.key, required this.dataColor, required this.index});
+
+  final List dataColor;
+
+  final int index;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(left: 16, top: 24, bottom: 24),
       decoration: BoxDecoration(
-        color: Color(0xffffcc80),
+        color: dataColor[index],
         borderRadius: BorderRadius.circular(16),
       ),
 
@@ -36,7 +40,7 @@ class NoteItem extends StatelessWidget {
                 "Build your career with thrawt sumy",
                 style: TextStyle(
                   color: Colors.black.withOpacity(0.4),
-                  fontSize: 24,
+                  fontSize: 18,
                 ),
               ),
             ),
