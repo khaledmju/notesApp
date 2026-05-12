@@ -52,7 +52,10 @@ class NoteItem extends StatelessWidget {
               //   icon: Icon(Icons.delete, color: Colors.black, size: 22),
               // ),
               trailing: GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  // this from hive
+                  noteModel.delete();
+                },
                 child: Icon(Icons.delete, color: Colors.black, size: 26),
               ),
               subtitle: Padding(

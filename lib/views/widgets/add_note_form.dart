@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:notesapp/cubits/addcotescubit/add_note_cubit.dart';
 import 'package:notesapp/models/note_model.dart';
 
@@ -51,10 +52,21 @@ class _AddNoteFormState extends State<AddNoteForm> {
                   if (formKey.currentState!.validate()) {
                     formKey.currentState!.save();
 
+                    var currentDate = DateTime.now();
+
+                    // we use intl package for date format
+                    // we can use this or
+                    var formatedDate = DateFormat.yMd().format(currentDate);
+
+                    // here i but my format
+                    // var formatedDate = DateFormat(
+                    //   "dd-mm-yyyy",
+                    // ).format(currentDate);
+
                     var noteModel = NoteModel(
                       title: title!,
                       subtitle: subTitle!,
-                      date: DateTime.now().toString(),
+                      date: formatedDate,
                       color: Colors.black.value,
                     );
 
