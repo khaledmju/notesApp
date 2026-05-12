@@ -13,6 +13,11 @@ class AddNoteBottomSheet extends StatelessWidget {
       create: (context) => AddNoteCubit(),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
+
+        // we could use Bloc listener instade of BlocConsumer because we dont have a rebuild
+        // but we use AbsorbPointer so we need to use BlocConsumer
+        // we use listener if we dont want to rebuild a ui just to do some line of code
+        // like moving back or navigate to page and like this
         child: BlocConsumer<AddNoteCubit, AddNoteState>(
           listener: (context, state) {
             if (state is AddNoteFailure) {
@@ -24,8 +29,8 @@ class AddNoteBottomSheet extends StatelessWidget {
             }
           },
           builder: (context, state) {
-            return ModalProgressHUD(
-              inAsyncCall: state is AddNoteLoading ? true : false,
+            return AbsorbPointer(
+              absorbing: state is AddNoteLoading ? true : false,
               child: SingleChildScrollView(child: AddNoteForm()),
             );
           },

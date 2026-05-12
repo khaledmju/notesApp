@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../constans.dart';
+import '../../cubits/add_note_cubit.dart';
 
 class CustomButton extends StatelessWidget {
-  const CustomButton({super.key, this.onTap});
+  const CustomButton({super.key, this.onTap, this.isLoading = false});
 
   final void Function()? onTap;
+
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -19,14 +23,16 @@ class CustomButton extends StatelessWidget {
           color: kPrimaryColor,
         ),
         child: Center(
-          child: Text(
-            "Add",
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-            ),
-          ),
+          child: isLoading
+              ? CircularProgressIndicator(color: Colors.black)
+              : Text(
+                  "Add",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
         ),
       ),
     );
