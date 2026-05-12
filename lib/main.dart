@@ -9,39 +9,68 @@ import 'package:notesapp/simple_bloc_observer.dart';
 import 'package:notesapp/views/NotesView.dart';
 
 void main() async {
-  Bloc.observer = SimpleBlocObserver();
-
   await Hive.initFlutter();
-  await Hive.openBox(kNotesBox);
+
+  Bloc.observer = SimpleBlocObserver();
 
   // this is will tell the hive that ill start  saving  data
   Hive.registerAdapter(NoteModelAdapter());
 
+
+  // we should add <NoteModel> to tell the type of data and what we will save
+  await Hive.openBox<NoteModel>(kNotesBox);
+
   runApp(const NotesApp());
 }
+
+// class NotesApp extends StatelessWidget {
+//   const NotesApp({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return MultiBlocProvider(
+//       providers: [BlocProvider(create: (context) => AddNoteCubit())],
+//       child: MaterialApp(
+//         debugShowCheckedModeBanner: false,
+//         // theme: ThemeData(
+//         //     // brightness: Brightness.dark // this is for background color or we use this
+//         //   // scaffoldBackgroundColor: Color(0xff2E2D2F),
+//         //
+//         //
+//         // ),
+//
+//         // or this
+//         theme: ThemeData.dark().copyWith(
+//           scaffoldBackgroundColor: Color(0xff2E2D2F),
+//         ),
+//         home: NotesView(),
+//       ),
+//     );
+//   }
+// }
+
+
+
 
 class NotesApp extends StatelessWidget {
   const NotesApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [BlocProvider(create: (context) => AddNoteCubit())],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        // theme: ThemeData(
-        //     // brightness: Brightness.dark // this is for background color or we use this
-        //   // scaffoldBackgroundColor: Color(0xff2E2D2F),
-        //
-        //
-        // ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      // theme: ThemeData(
+      //     // brightness: Brightness.dark // this is for background color or we use this
+      //   // scaffoldBackgroundColor: Color(0xff2E2D2F),
+      //
+      //
+      // ),
 
-        // or this
-        theme: ThemeData.dark().copyWith(
-          scaffoldBackgroundColor: Color(0xff2E2D2F),
-        ),
-        home: NotesView(),
+      // or this
+      theme: ThemeData.dark().copyWith(
+        scaffoldBackgroundColor: Color(0xff2E2D2F),
       ),
+      home: NotesView(),
     );
   }
 }
