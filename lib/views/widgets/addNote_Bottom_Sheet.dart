@@ -12,7 +12,14 @@ class AddNoteBottomSheet extends StatelessWidget {
     return BlocProvider(
       create: (context) => AddNoteCubit(),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
+        padding: EdgeInsets.only(
+          left: 24,
+          right: 24,
+
+          // this is when i press on text filed will change the tall of bottom sheet
+          // and will take the height
+          bottom: MediaQuery.of(context).viewInsets.bottom,
+        ),
 
         // we could use Bloc listener instade of BlocConsumer because we dont have a rebuild
         // but we use AbsorbPointer so we need to use BlocConsumer

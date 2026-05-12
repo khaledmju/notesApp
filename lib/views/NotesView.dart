@@ -13,9 +13,10 @@ class NotesView extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showModalBottomSheet(
-
+            // this is when i press on text filed will change the tall of bottom sheet
+            isScrollControlled: true,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadiusGeometry.circular(16)
+              borderRadius: BorderRadiusGeometry.circular(16),
             ),
             context: context,
             builder: (context) {
