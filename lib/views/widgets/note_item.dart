@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:notesapp/cubits/notesviewcubit/notes_cubit.dart';
 import 'package:notesapp/models/note_model.dart';
 import 'package:notesapp/views/edit_note_view.dart';
 
@@ -55,6 +57,7 @@ class NoteItem extends StatelessWidget {
                 onTap: () {
                   // this from hive
                   noteModel.delete();
+                  BlocProvider.of<NotesCubit>(context).fetchNotes();
                 },
                 child: Icon(Icons.delete, color: Colors.black, size: 26),
               ),

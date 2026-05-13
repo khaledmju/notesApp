@@ -22,3 +22,8 @@ final class NotesInitial extends NotesState {}
 //
 //   NotesFailure(this.errMassage);
 // }
+
+//====================Delete and Add ==================
+// we will add a NotesSuccess State bc when we delete the note or add note
+// the state will change so we need to do emit to state and add a state
+final class NotesSuccess extends NotesState {}
