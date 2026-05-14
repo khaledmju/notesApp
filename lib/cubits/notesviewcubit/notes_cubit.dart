@@ -48,11 +48,25 @@ class NotesCubit extends Cubit<NotesState> {
 
   List<NoteModel>? notes;
 
+  List<NoteModel>? searchList = [];
+
   void fetchNotes() {
     var notesBox = Hive.box<NoteModel>(kNotesBox);
 
     notes = notesBox.values.toList();
     // this is for when we delete or add note we need to emit state
+    emit(NotesSuccess());
+  }
+
+  void search(String keyWord) {
+    if (keyWord == "") {
+      searchList = notes; // Reset to original list
+    } else {
+      // Filter based on the keyword
+      searchList = notes!.where((element) {
+        return element.title.toLowerCase().contains(keyWord.toLowerCase());
+      }).toList();
+    }
     emit(NotesSuccess());
   }
 }

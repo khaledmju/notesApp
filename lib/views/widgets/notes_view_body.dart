@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notesapp/cubits/notesviewcubit/notes_cubit.dart';
+import 'package:notesapp/views/widgets/custom_textfiled.dart';
 
 import 'custom_app_bar.dart';
 
@@ -14,10 +15,16 @@ class NotesViewBody extends StatefulWidget {
 }
 
 class _NotesViewBodyState extends State<NotesViewBody> {
+  bool isTaped = false;
+
   @override
   void initState() {
     // this is will fetch the notes
     BlocProvider.of<NotesCubit>(context).fetchNotes();
+
+    BlocProvider.of<NotesCubit>(context).searchList =
+        BlocProvider.of<NotesCubit>(context).notes;
+
     super.initState();
   }
 
@@ -28,7 +35,30 @@ class _NotesViewBodyState extends State<NotesViewBody> {
       child: Column(
         children: [
           SizedBox(height: 50),
-          CustomAppBar(title: "Notes", iconData: Icons.search),
+          isTaped
+              ? CustomTextFiled(
+                  hint: "search on title",
+                  onChange: (value) {
+                    BlocProvider.of<NotesCubit>(
+                      context,
+                    ).search(value.toString());
+                  },
+                  isSearch: true,
+                  onTapIcon: () {
+                    BlocProvider.of<NotesCubit>(context).search("");
+                    isTaped = false;
+                    setState(() {});
+                  },
+                )
+              : CustomAppBar(
+                  title: "Notes",
+                  iconData: Icons.search,
+                  onTap: () {
+                    isTaped = true;
+                    setState(() {});
+                  },
+                ),
+          // CustomTextFiled(hint: "hint"),
           Expanded(child: NotesListView()),
         ],
       ),
