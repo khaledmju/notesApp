@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:notesapp/cubits/addcotescubit/add_note_cubit.dart';
 
 class ColorItem extends StatelessWidget {
   const ColorItem({super.key, required this.isSelected, required this.color});
@@ -26,16 +28,24 @@ class ColorListView extends StatefulWidget {
   State<ColorListView> createState() => _ColorListViewState();
 }
 
-int selectedIndex = 0;
-
-final dataColor = const [
-  Color(0xffFFCD7B),
-  Color(0xffE8E897),
-  Color(0xff77D6EF),
-  Color(0xffD49DDD),
-];
-
 class _ColorListViewState extends State<ColorListView> {
+  // this is if we want to use on AddNoteCubit the way Color? color ;
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   // ✅ مزامنة الـ UI مع الـ Cubit من أول لحظة
+  //   BlocProvider.of<AddNoteCubit>(context).color = dataColor[0];
+  // }
+
+  int selectedIndex = 0;
+  List<Color> dataColor = const [
+    Color(0xffFFCD7B),
+    Color(0xffE8E897),
+    Color(0xff77D6EF),
+    Color(0xffD49DDD),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -48,12 +58,17 @@ class _ColorListViewState extends State<ColorListView> {
             padding: const EdgeInsets.symmetric(horizontal: 6),
             child: GestureDetector(
               onTap: () {
-                selectedIndex = index;
-                setState(() {});
+                setState(() {
+                  selectedIndex = index;
+                  BlocProvider.of<AddNoteCubit>(context).color =
+                      dataColor[index];
+                });
+
+                // setState(() {});
               },
               child: ColorItem(
-                isSelected: selectedIndex == index,
                 color: dataColor[index],
+                isSelected: selectedIndex == index,
               ),
             ),
           );
