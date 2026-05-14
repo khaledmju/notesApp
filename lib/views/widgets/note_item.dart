@@ -7,14 +7,15 @@ import 'package:notesapp/views/edit_note_view.dart';
 class NoteItem extends StatelessWidget {
   const NoteItem({
     super.key,
-    required this.dataColor,
-    required this.index,
+
+    // required this.dataColor,
+    // required this.index,
     required this.noteModel,
   });
 
-  final List dataColor;
-
-  final int index;
+  // final List dataColor;
+  //
+  // final int index;
 
   final NoteModel noteModel;
 
@@ -34,7 +35,8 @@ class NoteItem extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.only(left: 16, top: 24, bottom: 24),
         decoration: BoxDecoration(
-          color: dataColor[index],
+          color: Color(0xffFFCD7B),
+
           borderRadius: BorderRadius.circular(16),
         ),
 

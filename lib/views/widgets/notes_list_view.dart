@@ -9,12 +9,12 @@ import 'note_item.dart';
 class NotesListView extends StatelessWidget {
   const NotesListView({super.key});
 
-  final dataColor = const [
-    Color(0xffFFCD7B),
-    Color(0xffE8E897),
-    Color(0xff77D6EF),
-    Color(0xffD49DDD),
-  ];
+  // final dataColor = const [
+  //   Color(0xffFFCD7B),
+  //   Color(0xffE8E897),
+  //   Color(0xff77D6EF),
+  //   Color(0xffD49DDD),
+  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -52,8 +52,9 @@ class NotesListView extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: 4),
                 child: NoteItem(
                   noteModel: notes[index],
-                  dataColor: dataColor,
-                  index: index % dataColor.length,
+                  // this was when the color was static not a picker
+                  // dataColor: dataColor,
+                  // index: index % dataColor.length,
                 ),
               );
             },
